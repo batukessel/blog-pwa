@@ -2,7 +2,7 @@ const CACHE_NAME =
 'almukhtar-shell-v1';
 
 const APP_SHELL =
-'https://batukessel.github.io/blog-pwa/app-shell.html';
+'https://almukhtarom.blogspot.com/';
 
 // INSTALL
 self.addEventListener(
