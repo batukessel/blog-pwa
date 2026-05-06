@@ -1,8 +1,8 @@
 const CACHE_NAME =
   'almukhtar-v1';
 
-const BLOG_URL =
-  'https://almukhtarom.blogspot.com/';
+ const BLOG_URL =
+'https://almukhtarom.blogspot.com/?source=pwa';
 
 const OFFLINE_URL =
   'https://batukessel.github.io/blog-pwa/offline.html';
