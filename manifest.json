@@ -2,7 +2,7 @@
   "name": "Al Mukhtar",
   "short_name": "Mukhtar",
 
- "start_url": "https://batukessel.github.io/blog-pwa/app-shell.html"
+  "start_url": "/",
 
   "scope": "/",
 
