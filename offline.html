@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="UTF-8"/>
+
+<meta
+  name="viewport"
+  content="width=device-width,initial-scale=1"
+/>
+
+<title>Offline</title>
+
+<style>
+
+body{
+
+  margin:0;
+
+  background:#0f172a;
+
+  color:#fff;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  flex-direction:column;
+
+  height:100vh;
+
+  font-family:Arial;
+
+}
+
+img{
+
+  width:120px;
+
+  height:120px;
+
+  border-radius:24px;
+
+}
+
+h1{
+
+  margin-top:20px;
+
+}
+
+#clock{
+
+  font-size:56px;
+
+  margin-top:20px;
+
+  font-weight:bold;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<img src="https://batukessel.github.io/blog-pwa/icon-512.png"/>
+
+<h1>Offline Mode</h1>
+
+<p>Aplikasi tetap berjalan</p>
+
+<div id="clock">
+00:00:00
+</div>
+
+<script>
+
+function updateClock(){
+
+  var d=new Date();
+
+  var h=
+    ('0'+d.getHours()).slice(-2);
+
+  var m=
+    ('0'+d.getMinutes()).slice(-2);
+
+  var s=
+    ('0'+d.getSeconds()).slice(-2);
+
+  document.getElementById(
+    'clock'
+  ).innerHTML=
+    h+':'+m+':'+s;
+
+}
+
+setInterval(updateClock,1000);
+
+updateClock();
+
+</script>
+
+</body>
+</html>
