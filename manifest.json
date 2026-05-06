@@ -1,11 +1,19 @@
 {
   "name": "Al Mukhtar",
   "short_name": "Mukhtar",
-  "start_url": "https://almukhtarom.blogspot.com/",
+
+  "start_url": "/?source=pwa",
+
+  "scope": "/",
+
   "display": "standalone",
+
   "background_color": "#0f172a",
+
   "theme_color": "#0f766e",
+
   "orientation": "portrait",
+
   "icons": [
     {
       "src": "https://batukessel.github.io/blog-pwa/icon-192.png",
