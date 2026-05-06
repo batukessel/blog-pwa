@@ -1,141 +1,99 @@
 const CACHE_NAME =
-  'almukhtar-v1';
+'almukhtar-shell-v1';
 
- const BLOG_URL =
-'https://almukhtarom.blogspot.com/?source=pwa';
-
-const OFFLINE_URL =
-  'https://batukessel.github.io/blog-pwa/offline.html';
+const APP_SHELL =
+'https://batukessel.github.io/blog-pwa/app-shell.html';
 
 // INSTALL
 self.addEventListener(
-  'install',
-  function(event){
+'install',
+function(event){
 
-    self.skipWaiting();
+  self.skipWaiting();
 
-    event.waitUntil(
+  event.waitUntil(
 
-      caches.open(CACHE_NAME)
+    caches.open(CACHE_NAME)
 
-        .then(function(cache){
+      .then(function(cache){
 
-          return cache.addAll([
-            BLOG_URL,
-            OFFLINE_URL
-          ]);
+        return cache.addAll([
+          APP_SHELL
+        ]);
 
-        })
+      })
 
-    );
+  );
 
-  }
+}
 );
 
 // ACTIVATE
 self.addEventListener(
-  'activate',
-  function(event){
+'activate',
+function(event){
 
-    event.waitUntil(
+  event.waitUntil(
 
-      Promise.all([
+    self.clients.claim()
 
-        self.clients.claim(),
+  );
 
-        caches.keys()
-
-          .then(function(keys){
-
-            return Promise.all(
-
-              keys.map(function(key){
-
-                if(key !== CACHE_NAME){
-
-                  return caches.delete(key);
-
-                }
-
-              })
-
-            );
-
-          })
-
-      ])
-
-    );
-
-  }
+}
 );
 
 // FETCH
 self.addEventListener(
-  'fetch',
-  function(event){
+'fetch',
+function(event){
 
-    if(
-      event.request.method !== 'GET'
-    ){
-      return;
-    }
-
-    event.respondWith(
-
-      caches.match(event.request)
-
-        .then(function(cacheResponse){
-
-          if(cacheResponse){
-
-            return cacheResponse;
-
-          }
-
-          return fetch(event.request)
-
-            .then(function(networkResponse){
-
-              const responseClone =
-                networkResponse.clone();
-
-              caches.open(CACHE_NAME)
-
-                .then(function(cache){
-
-                  cache.put(
-                    event.request,
-                    responseClone
-                  );
-
-                });
-
-              return networkResponse;
-
-            })
-
-            .catch(function(){
-
-              return caches.match(
-                BLOG_URL
-              )
-
-              .then(function(home){
-
-                return home ||
-
-                  caches.match(
-                    OFFLINE_URL
-                  );
-
-              });
-
-            });
-
-        })
-
-    );
-
+  if(
+    event.request.method !== 'GET'
+  ){
+    return;
   }
+
+  event.respondWith(
+
+    fetch(event.request)
+
+      .then(function(response){
+
+        const clone =
+        response.clone();
+
+        caches.open(CACHE_NAME)
+
+          .then(function(cache){
+
+            cache.put(
+              event.request,
+              clone
+            );
+
+          });
+
+        return response;
+
+      })
+
+      .catch(function(){
+
+        return caches.match(
+          event.request
+        )
+
+        .then(function(resp){
+
+          return resp ||
+
+          caches.match(APP_SHELL);
+
+        });
+
+      })
+
+  );
+
+}
 );
